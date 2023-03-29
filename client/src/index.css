@@ -28,12 +28,13 @@
 	src: url("./assets/fonts/Lemonada-VariableFont_wght.ttf");
 }
 
-.magic-input > label {
+.magic-input + label {
 	translate: 0 -56px;
 	color: #888888;
 }
 
-.magic-input > :is(input:focus, .has-value) ~ label {
+.magic-input:focus + label,
+.has-value + label {
 	translate: 0 -83px;
 	color: #353535;
 	z-index: 11;

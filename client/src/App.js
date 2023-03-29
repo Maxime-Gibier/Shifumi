@@ -1,18 +1,33 @@
 import "./App.css";
-import ConnexionView from "./views/ConnexionView";
-import SubscriptionView from "./views/SubscriptionView";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import LoginView from "./views/LoginView";
+import RegisterView from "./views/RegisterView";
 import Header from "./components/Header";
+import Play from "./views/Play";
+import AuthProvider from "./contexts/AuthContext";
+import PrivateRoutes from "./components/PrivateRoutes";
 
 function App() {
 	return (
 		<div className="App h-screen w-screen flex flex-col justify-center items-center">
 			<BrowserRouter>
 				<Header />
-				<Routes>
-					<Route path="/Subscription" element={<SubscriptionView />}></Route>
-					<Route path="/connexion" element={<ConnexionView />}></Route>
-				</Routes>
+				<AuthProvider>
+					<Routes>
+						<Route path="/" element={<Navigate to="/login" />}></Route>
+
+						<Route path="/register" element={<RegisterView />}></Route>
+						<Route path="/login" element={<LoginView />}></Route>
+						<Route
+							path="/play"
+							element={
+								<PrivateRoutes>
+									<Play />
+								</PrivateRoutes>
+							}
+						></Route>
+					</Routes>
+				</AuthProvider>
 			</BrowserRouter>
 		</div>
 	);

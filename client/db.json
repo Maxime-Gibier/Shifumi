@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "email": "maxime.gibier@icloud.com",
+      "password": "$2a$10$N/FpH3Ep9X1um55ai64fJeNNf0ninfrrppj13REojHPwxTH9QEHfe",
+      "pseudo": "Maxime",
+      "id": 1
+    }
+  ]
+}
