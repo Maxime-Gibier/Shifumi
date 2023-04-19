@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import Input from "../components/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -20,15 +20,9 @@ const RegisterView = () => {
 			.catch((e) => console.error("Registration error", e.message));
 	}
 	return (
-		<div className="w-screen flex flex-col justify-center items-center font-text">
+		<div className="w-screen flex flex-col justify-center items-center font-text pt-44">
 			<form className="w-[500px] flex flex-col" onSubmit={handleRegister}>
-				<Input type={"text"} name={"pseudo"} text={"Pseudo"} />
-				<Input
-					type={"email"}
-					name={"email"}
-					text={"e-mail"}
-					autoComplete={"email"}
-				/>
+				<Input type={"text"} name={"username"} text={"username"} />
 				<Input
 					type={"password"}
 					name={"password"}

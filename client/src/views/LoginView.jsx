@@ -16,7 +16,7 @@ const LoginView = () => {
 	function handleLogin(event) {
 		event.preventDefault();
 		const data = Object.fromEntries(new FormData(event.currentTarget));
-		login(data.email, data.password)
+		login(data.username, data.password)
 			.then(() => {
 				console.log("Succefully login");
 				navigate("/play");
@@ -25,13 +25,13 @@ const LoginView = () => {
 	}
 
 	return (
-		<div className="w-screen flex flex-col justify-center items-center font-text">
+		<div className="w-screen flex flex-col justify-center items-center font-text pt-44">
 			<form className="w-[500px] flex flex-col" onSubmit={handleLogin}>
 				<Input
-					type={"email"}
-					name={"email"}
-					text={"e-mail"}
-					autoComplete={"email"}
+					type={"text"}
+					name={"username"}
+					text={"username"}
+					autoComplete={"username"}
 				/>
 				<Input type={"password"} name={"password"} text={"Password"} />
 				<input

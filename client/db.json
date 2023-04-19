@@ -5,6 +5,37 @@
       "password": "$2a$10$N/FpH3Ep9X1um55ai64fJeNNf0ninfrrppj13REojHPwxTH9QEHfe",
       "pseudo": "Maxime",
       "id": 1
+    },
+    {
+      "email": "theo@icloud.com",
+      "password": "$2a$10$iLOzPGCYvsqeiNu83jUsUu.y5Env8m.y9Qf8QopNJPVoAy8TLvngq",
+      "pseudo": "the Hau",
+      "id": 2
+    },
+    {
+      "email": "titou@icloud.com",
+      "password": "$2a$10$E/wyld8qvQ.ntcCy1Z3hsOqs6rYQijzGN91vfzi1fIwbsLzKs4Qhi",
+      "pseudo": "titou",
+      "id": 3
+    },
+    {
+      "email": "olivier2@mail.com",
+      "password": "$2a$10$ImcCKUhqW9oPYrSfXK0vx.4kf2718w5SFne5/HOrZpirhMv5Rlj4C",
+      "name": "Olivier",
+      "surname": "Deme",
+      "id": 4
+    },
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$mEJBrOKRa8guRHU0yPm3wuZtUMb19JJhGzJzJdw2NO4QSAtiS.rFq",
+      "name": "Olivier",
+      "surname": "Deme",
+      "id": 5
+    },
+    {
+      "email": "monpseudo@mail.com",
+      "password": "$2a$10$wWtZbNeDFIjOA0j0vQTk/eJckQMU2NBKSmePJ0gQchKckl3F936Bq",
+      "id": 6
     }
   ]
 }

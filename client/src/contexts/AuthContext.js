@@ -1,8 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext(
-	localStorage.getItem("auth") || "light"
-);
+export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
 	/**
@@ -13,46 +11,43 @@ export default function AuthProvider({ children }) {
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		if (token) {
-			setUserFromToken(token);
+			setUser(token);
 		} else {
 			setUser(false);
 		}
 	}, []);
 
-	function setUserFromToken(token) {
-		const payload = token.split(".")[1];
-		setUser(JSON.parse(atob(payload)));
-	}
-
-	async function login(email, password) {
-		const response = await fetch("http://localhost:5001/login", {
+	async function login(username, password) {
+		const response = await fetch("http://fauques.freeboxos.fr:3000/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ email, password }),
+			body: JSON.stringify({ username, password }),
 		});
 		if (response.status === 200) {
 			const data = await response.json();
-			localStorage.setItem("token", data.accessToken);
-			setUserFromToken(data.accessToken);
+			localStorage.setItem("token", data.token);
+			const user = JSON.parse(atob(data.token.split(".")[1]));
+			localStorage.setItem("_id", user._id);
+			setUser(data.token);
 		} else {
 			throw new Error("Login failed:", response.status);
 		}
 	}
-	async function register(pseudo, email, password) {
-		const response = await fetch("http://localhost:5001/register", {
+	async function register(username, password) {
+		const response = await fetch("http://fauques.freeboxos.fr:3000/register", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ pseudo, email, password }),
+			body: JSON.stringify({ username, password }),
 		});
 
 		if (response.status === 201) {
 			const data = await response.json();
-			localStorage.setItem("token", data.accessToken);
-			setUserFromToken(data.accessToken);
+			localStorage.setItem("token", data.token);
+			setUser(data.token);
 		} else {
 			throw new Error("Registration failed:");
 		}

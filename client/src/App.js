@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Play from "./views/Play";
 import AuthProvider from "./contexts/AuthContext";
 import PrivateRoutes from "./components/PrivateRoutes";
+import GameProvider from "./contexts/GameContext";
+import GamesView from "./views/GamesView";
 
 function App() {
 	return (
@@ -18,11 +20,24 @@ function App() {
 
 						<Route path="/register" element={<RegisterView />}></Route>
 						<Route path="/login" element={<LoginView />}></Route>
+
 						<Route
 							path="/play"
 							element={
 								<PrivateRoutes>
-									<Play />
+									<GameProvider>
+										<Play />
+									</GameProvider>
+								</PrivateRoutes>
+							}
+						></Route>
+						<Route
+							path="/games"
+							element={
+								<PrivateRoutes>
+									<GameProvider>
+										<GamesView />
+									</GameProvider>
 								</PrivateRoutes>
 							}
 						></Route>
