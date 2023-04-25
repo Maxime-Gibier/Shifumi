@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 const Play = () => {
 	const { logout } = useContext(AuthContext);
-	const { getGames} = useContext(GameContext);
+	const { getGames, postGames } = useContext(GameContext);
 	const navigate = useNavigate();
 
 	function handleJoin() {
-		getGames().then(() => navigate("/games"));
+		getGames();
+		postGames().then(() => navigate("/games"));
 	}
 
 	return (

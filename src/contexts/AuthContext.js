@@ -3,9 +3,6 @@ import { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-	/**
-	 * Gestion du auth
-	 */
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -28,8 +25,6 @@ export default function AuthProvider({ children }) {
 		if (response.status === 200) {
 			const data = await response.json();
 			localStorage.setItem("token", data.token);
-			const user = JSON.parse(atob(data.token.split(".")[1]));
-			localStorage.setItem("_id", user._id);
 			setUser(data.token);
 		} else {
 			throw new Error("Login failed:", response.status);
@@ -47,7 +42,7 @@ export default function AuthProvider({ children }) {
 		if (response.status === 201) {
 			const data = await response.json();
 			localStorage.setItem("token", data.token);
-			setUser(data.token);
+			login(username, password)
 		} else {
 			throw new Error("Registration failed:");
 		}

@@ -1,0 +1,49 @@
+@host = http://fauques.freeboxos.fr:3000/
+
+POST {{host}}register
+Content-Type: application/json
+
+{
+  "username": "maxime02",
+  "password": "mypassword"
+}
+
+###
+POST {{host}}login
+Content-Type: application/json
+
+{
+  "username": "maxime10",
+  "password": "test"
+}
+
+
+###
+GET {{host}}matches
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkwODI5MC1hYTE4LTQzOGQtODEwYi1kNjQxOTYxYmFmNmQiLCJ1c2VybmFtZSI6Im1heGltZTEwIiwiaWF0IjoxNjgyMDkyMjc1LCJleHAiOjE3MTM2NDk4NzV9.LpI-sTHIkxISZ6CwffNHfP6XCDLYxrw7MzEc7E1j6V8
+
+###
+GET {{host}}matches/6447ee201e1b9407b2631f05
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkwODI5MC1hYTE4LTQzOGQtODEwYi1kNjQxOTYxYmFmNmQiLCJ1c2VybmFtZSI6Im1heGltZTEwIiwiaWF0IjoxNjgyMDkyMjc1LCJleHAiOjE3MTM2NDk4NzV9.LpI-sTHIkxISZ6CwffNHfP6XCDLYxrw7MzEc7E1j6V8
+
+###
+POST {{host}}matches
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJiZmUwMjJkZi1jYjgzLTRkMWYtYjFiYy1jNWE3YzA0NTIwZDciLCJ1c2VybmFtZSI6Im1heGltZTAyIiwiaWF0IjoxNjgyMDYyMTAyLCJleHAiOjE3MTM2MTk3MDJ9.-bGFiWV1QSNyUnvQq22U2QqU82-_hjK5lllwqoG9zl0
+
+###
+POST {{host}}matches/6447ebc21e1b9407b2631e7c/turns/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJiZmUwMjJkZi1jYjgzLTRkMWYtYjFiYy1jNWE3YzA0NTIwZDciLCJ1c2VybmFtZSI6Im1heGltZTAyIiwiaWF0IjoxNjgxODk3ODA5LCJleHAiOjE3MTM0NTU0MDl9.sVMeJ7G7SIaLJxPvNy5FHlbWnPfnxQXEp6dRCX3F_Jk
+Content-Type: application/json
+
+{
+  "move": "scissors"
+}
+
+###
+POST {{host}}matches/6447ebc21e1b9407b2631e7c/turns/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkwODI5MC1hYTE4LTQzOGQtODEwYi1kNjQxOTYxYmFmNmQiLCJ1c2VybmFtZSI6Im1heGltZTEwIiwiaWF0IjoxNjgyNDI0NDEwLCJleHAiOjE3MTM5ODIwMTB9.LhSU4nu-B0I0RlI5gxaBxEkhYSnGzlT3Wid2NaHA1Kk
+Content-Type: application/json
+
+{
+  "move": "rock"
+}
