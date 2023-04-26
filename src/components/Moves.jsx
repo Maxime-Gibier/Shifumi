@@ -1,16 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Pierre from "../assets/img/Pierre.png";
 import Feuille from "../assets/img/Feuille.png";
 import Ciseaux from "../assets/img/Ciseaux.png";
 import { GameContext } from "../contexts/GameContext";
-import { useNavigate } from "react-router-dom";
 
 const Moves = () => {
-	const { postMove, getGames,currentTurn, setCurrentTurn } = useContext(GameContext);
-	const navigate = useNavigate();
+	const { postMove } = useContext(GameContext);
 
 	function handleMove(move) {
-		postMove(move)
+		postMove(move);
 	}
 
 	return (

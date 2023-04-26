@@ -5,7 +5,7 @@ import MoveView from "../components/MoveView";
 import Winner from "../components/Winner";
 
 const GamesView = () => {
-	const { games, getGames, currentGame } = useContext(GameContext);
+	const { games, getGames, currentGame, currentTurn } = useContext(GameContext);
 	
 
 	useEffect(() => {
@@ -16,9 +16,9 @@ const GamesView = () => {
 		  		clearInterval(intervalId);
 	  }
 	  return () => clearInterval(intervalId);
-    }, 10000);
+    }, 5000);
 
-  }, []);
+  }, [currentTurn]);
 
   if (games) {
     return (
@@ -36,7 +36,7 @@ const GamesView = () => {
               : "en attente ..."}
           </h5>
 			</span>
-			{currentGame !== undefined ? <MoveView /> : <></>}
+        {currentGame !== undefined ? <MoveView /> : <></>}
         {currentGame.winner !== undefined ? <Winner /> : <Moves />}
       </div>
     );

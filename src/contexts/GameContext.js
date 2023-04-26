@@ -9,6 +9,21 @@ export default function GameProvider({ children }) {
 	const [currentGame, setCurrentGame] = useState();
 	const [currentTurn, setCurrentTurn] = useState(1);
 
+	function handleTurn() {
+		if (
+			currentGame &&
+			currentGame.turns !== null &&
+			currentGame.turns.length > 0
+		) {
+			console.log(currentGame.turns[currentTurn - 1].winner === undefined);
+			setCurrentTurn(
+				currentGame.turns[currentTurn - 1].winner === undefined
+					? currentGame.turns.length 
+					: currentGame.turns.length + 1
+			);
+		}
+	}
+
 	async function getGames() {
 		const token = localStorage.getItem("token");
 		const response = await fetch("http://fauques.freeboxos.fr:3000/matches", {
@@ -21,7 +36,8 @@ export default function GameProvider({ children }) {
 		if (response.status === 200) {
 			const data = await response.json();
 			setGames(data);
-			setCurrentGame(data[data.length - 1]); 
+			setCurrentGame(data[data.length - 1]);
+			handleTurn();
 		} else {
 			throw new Error("matches failed:", response.status);
 		}
@@ -38,9 +54,10 @@ export default function GameProvider({ children }) {
 		});
 	}
 
-	async function postMove(move, game) {
+	async function postMove(move) {
 		const token = user;
-		console.log(currentTurn)
+		console.log(currentTurn);
+
 		const response = await fetch(
 			`http://fauques.freeboxos.fr:3000/matches/${currentGame._id}/turns/${currentTurn}`,
 			{
@@ -53,10 +70,8 @@ export default function GameProvider({ children }) {
 			}
 		);
 		if (response.status === 202) {
-			console.log( response )
-			setCurrentTurn(currentTurn + 1)
-			const data = await response.json();
-			console.log(currentTurn)
+			const data = await response;
+			getGames();
 		} else {
 			const data = await response.json();
 			const error = JSON.stringify(data.match ?? data.user ?? data.turn);
@@ -78,7 +93,16 @@ export default function GameProvider({ children }) {
 
 	return (
 		<GameContext.Provider
-			value={{ getGames, games, currentGame,currentTurn, setCurrentTurn, setGames, postGames, postMove }}
+			value={{
+				getGames,
+				games,
+				currentGame,
+				currentTurn,
+				setCurrentTurn,
+				setGames,
+				postGames,
+				postMove,
+			}}
 		>
 			{children}
 		</GameContext.Provider>
