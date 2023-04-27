@@ -5,14 +5,16 @@ import Bouton from "./Bouton";
 
 const Winner = () => {
 	const { currentGame } = useContext(GameContext);
-	const [text, setText] = useState("")
+	const [text, setText] = useState("");
 	useEffect(() => {
 		if (currentGame.winner === null) {
-			setText("It's a Draw")
+			setText("It's a Draw");
 		} else {
-			currentGame.winner.username !== null ? setText(currentGame.winner.username + " is the winner") : setText("It's a Draw");
+			currentGame.winner.username !== null
+				? setText(currentGame.winner.username + " is the winner")
+				: setText("It's a Draw");
 		}
-	})
+	}, [currentGame.winner]);
 	const navigate = useNavigate();
 
 	return (
@@ -22,7 +24,9 @@ const Winner = () => {
 				primary={true}
 				text="Quitter"
 				small={true}
-				onClick={() => navigate("/play")}
+				onClick={() =>
+					navigate("/play")
+				}
 			/>
 		</span>
 	);

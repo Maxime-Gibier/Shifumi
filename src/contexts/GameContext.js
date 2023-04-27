@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
 export const GameContext = createContext();
@@ -7,22 +7,6 @@ export default function GameProvider({ children }) {
 	const { user } = useContext(AuthContext);
 	const [games, setGames] = useState();
 	const [currentGame, setCurrentGame] = useState();
-	const [currentTurn, setCurrentTurn] = useState(1);
-
-	function handleTurn() {
-		if (
-			currentGame &&
-			currentGame.turns !== null &&
-			currentGame.turns.length > 0
-		) {
-			console.log(currentGame.turns[currentTurn - 1].winner === undefined);
-			setCurrentTurn(
-				currentGame.turns[currentTurn - 1].winner === undefined
-					? currentGame.turns.length 
-					: currentGame.turns.length + 1
-			);
-		}
-	}
 
 	async function getGames() {
 		const token = localStorage.getItem("token");
@@ -35,9 +19,8 @@ export default function GameProvider({ children }) {
 		});
 		if (response.status === 200) {
 			const data = await response.json();
-			setGames(data);
-			setCurrentGame(data[data.length - 1]);
-			handleTurn();
+			setGames(data)
+			setCurrentGame(data[data.length - 1])
 		} else {
 			throw new Error("matches failed:", response.status);
 		}
@@ -52,12 +35,15 @@ export default function GameProvider({ children }) {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		if (response.status === 201) {
+			getGames();
+		} else {
+			throw new Error("matches failed:", response.status);
+		}
 	}
 
-	async function postMove(move) {
+	async function postMove(move, currentTurn) {
 		const token = user;
-		console.log(currentTurn);
-
 		const response = await fetch(
 			`http://fauques.freeboxos.fr:3000/matches/${currentGame._id}/turns/${currentTurn}`,
 			{
@@ -70,7 +56,6 @@ export default function GameProvider({ children }) {
 			}
 		);
 		if (response.status === 202) {
-			const data = await response;
 			getGames();
 		} else {
 			const data = await response.json();
@@ -97,8 +82,6 @@ export default function GameProvider({ children }) {
 				getGames,
 				games,
 				currentGame,
-				currentTurn,
-				setCurrentTurn,
 				setGames,
 				postGames,
 				postMove,

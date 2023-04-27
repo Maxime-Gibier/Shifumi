@@ -9,6 +9,7 @@ const Play = () => {
 	const { getGames, postGames } = useContext(GameContext);
 	const navigate = useNavigate();
 
+
 	function handleJoin() {
 		getGames();
 		postGames().then(() => navigate("/games"));
