@@ -1,9 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
 	const [user, setUser] = useState(null);
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -38,11 +40,10 @@ export default function AuthProvider({ children }) {
 			},
 			body: JSON.stringify({ username, password }),
 		});
-
 		if (response.status === 201) {
 			const data = await response.json();
-			localStorage.setItem("token", data.token);
-			login(username, password)
+			localStorage.setItem("token", data.token)
+			navigate("/play");
 		} else {
 			throw new Error("Registration failed:");
 		}

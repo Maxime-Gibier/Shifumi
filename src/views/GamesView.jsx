@@ -5,7 +5,7 @@ import MoveView from "../components/MoveView";
 
 
 const GamesView = () => {
-	const { games, getGames, currentGame } = useContext(GameContext);
+	const { getGames, currentGame } = useContext(GameContext);
 	const [currentTurn, setCurrentTurn] = useState(1);
 
 	useEffect(() => {
@@ -20,7 +20,7 @@ const GamesView = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentTurn]);
 
-	if (games) {
+	if (currentGame) {
 		return (
 			<div className="flex w-full h-4/6 flex-col absolute bottom-0">
 				<span className="flex h-1/5 w-full font-text justify-around items-center px-60">
