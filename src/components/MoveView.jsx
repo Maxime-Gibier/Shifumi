@@ -14,8 +14,9 @@ const MoveView = ({ currentTurn, setCurrentTurn }) => {
 	const { postMove, getGames } = useContext(GameContext);
 
 	async function handleMove(move) {
-		getGames();
-		postMove(move, currentTurn);
+		postMove(move, currentTurn)
+			.then(() => getGames())
+			.catch((e) => console.error(e));
 		setCurrentTurn(currentTurn + 1);
 	}
 

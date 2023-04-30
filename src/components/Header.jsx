@@ -5,7 +5,7 @@ import Pierre from "../assets/img/Pierre.png";
 
 const Header = () => {
 	return (
-		<header className="duration-200 flex flex-col items-center justify-center absolute top-12">
+		<header className="flex flex-col items-center justify-center absolute top-12">
 			<h1 className="font-title text-8xl mb-4">SHIFUMI TM</h1>
 			<span className="mb-4 flex">
 				<img src={Pierre} alt="Pierre" className="h-[100px] mx-8" />

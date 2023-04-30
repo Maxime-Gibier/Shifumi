@@ -1,13 +1,16 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import AuthProvider from "./contexts/AuthContext";
+import GameProvider from "./contexts/GameContext";
 import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
-import Header from "./components/Header";
-import Play from "./views/Play";
-import AuthProvider from "./contexts/AuthContext";
-import PrivateRoutes from "./components/PrivateRoutes";
-import GameProvider from "./contexts/GameContext";
+import PlayView from "./views/PlayView";
 import GamesView from "./views/GamesView";
+import PrivateRoutes from "./components/PrivateRoutes";
+import Header from "./components/Header";
+import Logout from "./components/Logout";
+
+
 
 function App() {
 	return (
@@ -17,16 +20,17 @@ function App() {
 				<AuthProvider>
 					<Routes>
 						<Route path="/" element={<Navigate to="/login" />}></Route>
-
 						<Route path="/register" element={<RegisterView />}></Route>
 						<Route path="/login" element={<LoginView />}></Route>
-
+					</Routes>
+					<Routes>
 						<Route
 							path="/play"
 							element={
 								<PrivateRoutes>
+									<Logout />
 									<GameProvider>
-										<Play />
+										<PlayView />
 									</GameProvider>
 								</PrivateRoutes>
 							}
@@ -35,6 +39,7 @@ function App() {
 							path="/games"
 							element={
 								<PrivateRoutes>
+									<Logout />
 									<GameProvider>
 										<GamesView />
 									</GameProvider>
